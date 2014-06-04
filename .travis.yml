@@ -1,9 +1,9 @@
 language: java
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y maven2
+  - ./install-maven.sh
   - psql -U postgres -c 'create database travis_ci_test;'
   - psql travis_ci_test -U postgres < ./dspace/etc/postgres/database_create_doi_table.sql
-  - export M2_HOME=''
+  - export M2="$TRAVIS_BUILD_DIR/apache-maven-2.2.1-bin"
+  - export M2_HOME="$TRAVIS_BUILD_DIR/apache-maven-2.2.1-bin"
 install: true
-script: "/usr/bin/mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=../../../test"
+script: "$TRAVIS_BUILD_DIR/apache-maven-2.2.1-bin/bin/mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=$TRAVIS_BUILD_DIR/test"
