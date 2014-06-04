@@ -5,4 +5,5 @@ before_script:
   - sudo apt-get install -y maven2
   - psql -U postgres -c 'create database travis_ci_test;'
   - psql travis_ci_test -U postgres < ./dspace/etc/postgres/database_create_doi_table.sql
+  - export M2_HOME=/usr/share/maven2
 script: "/usr/bin/mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=./test"
