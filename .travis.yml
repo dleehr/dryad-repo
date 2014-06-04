@@ -1,6 +1,8 @@
 language: java
 install: true
 before_script:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y maven2
   - psql -U postgres -c 'create database travis_ci_test;'
   - psql travis_ci_test -U postgres < ./dspace/etc/postgres/database_create_doi_table.sql
 script: "mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=./test"
