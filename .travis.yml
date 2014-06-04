@@ -7,4 +7,4 @@ before_install:
   - export M2_HOME=/usr/share/maven2
   - export M2=/usr/share/maven2
 install: true
-script: "/usr/bin/mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=../../../../test"
+script: "/usr/bin/mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=../../../test"
