@@ -1,13 +1,11 @@
 language: java
 jdk: openjdk6
 before_install:
-  - sudo apt-get remove maven
   - ./install-maven.sh
   - psql -U postgres -c 'create database travis_ci_test;'
   - psql travis_ci_test -U postgres < ./dspace/etc/postgres/database_create_doi_table.sql
-  - export M2="$TRAVIS_BUILD_DIR/apache-maven-2.2.1"
   - export M2_HOME="$TRAVIS_BUILD_DIR/apache-maven-2.2.1"
-  - export PATH="$TRAVIS_BUILD_DIR/apache-maven-2.2.1/bin:$PATH"
+  - export PATH="$M2_HOME/bin:$PATH"
   - env
 install: true
-script: "$TRAVIS_BUILD_DIR/apache-maven-2.2.1/bin/mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=$TRAVIS_BUILD_DIR/test"
+script: "mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=$TRAVIS_BUILD_DIR/test"
