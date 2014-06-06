@@ -2,7 +2,8 @@ language: java
 jdk: openjdk6
 before_install:
   - ./test/bin/install-maven.sh
-  - psql -U postgres -c 'create database travis_ci_test;'
+  - psql -U postgres -c "create user dryad_travis_user with createdb;"
+  - psql -U dryad_travis_user -c 'create database travis_ci_test;'
   - psql travis_ci_test -U postgres < ./dspace/etc/postgres/database_create_doi_table.sql
   - export PATH="$TRAVIS_BUILD_DIR/apache-maven-2.2.1/bin:$PATH"
 install:
