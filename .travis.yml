@@ -2,15 +2,13 @@ language: java
 jdk: openjdk6
 before_install:
   - ./test/bin/install-maven.sh
-  - psql -U postgres -c "create user dryad_travis_user with createdb;"
-  - createdb -U dryad_travis_user travis_ci_test
-  - psql travis_ci_test -U dryad_travis_user < ./dspace/etc/postgres/database_schema.sql
-  - psql travis_ci_test -U dryad_travis_user < ./dspace/etc/postgres/database_create_doi_table.sql
+  - psql -U postgres -c "create user dryad_test_user with createdb;"
+  - createdb -U dryad_test_user travis_ci_test
+  - psql dryad_test -U dryad_test_user < ./dspace/etc/postgres/database_schema.sql
+  - psql dryad_test -U dryad_test_user < ./dspace/etc/postgres/database_create_doi_table.sql
   - export PATH="$TRAVIS_BUILD_DIR/apache-maven-2.2.1/bin:$PATH"
 install:
   - ./test/bin/install-missing-poms.sh
   - ./test/bin/install-dryad-dir.sh
-script: 
-  - mvn package -Dmaven.test.skip=false -Ddefault.dspace.dir=/opt/dryad
-  - if [ -d ./dspace/modules/doi/dspace-doi-api/target/surefire-reports ]; then  cat ./dspace/modules/doi/dspace-doi-api/target/surefire-reports/*; fi;
+script: mvn package -Dmaven.test.skip=false -Ddefault.dspace.dir=/opt/dryad-test
 
