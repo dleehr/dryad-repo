@@ -9,4 +9,4 @@ before_install:
 install:
   - ./test/bin/install-missing-poms.sh
   - ./test/bin/install-dryad-dir.sh
-script: "mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=/opt/dryad"
+script: "mvn package -Dmaven.test.skip=false -Ddefault.dspace.dir=/opt/dryad"
