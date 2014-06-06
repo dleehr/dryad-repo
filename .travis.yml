@@ -4,8 +4,7 @@ before_install:
   - ./install-maven.sh
   - psql -U postgres -c 'create database travis_ci_test;'
   - psql travis_ci_test -U postgres < ./dspace/etc/postgres/database_create_doi_table.sql
-  - export M2_HOME="$TRAVIS_BUILD_DIR/apache-maven-2.2.1"
-  - export PATH="$M2_HOME/bin:$PATH"
+  - export PATH="$TRAVIS_BUILD_DIR/apache-maven-2.2.1/bin:$PATH"
   - env
   - which mvn
   - mvn --version
