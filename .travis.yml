@@ -9,4 +9,7 @@ before_install:
 install:
   - ./test/bin/install-missing-poms.sh
   - ./test/bin/install-dryad-dir.sh
-script: "mvn package -Dmaven.test.skip=false -Ddefault.dspace.dir=/opt/dryad"
+script: 
+  - mvn package -Dmaven.test.skip=false -Ddefault.dspace.dir=/opt/dryad
+  - if [ -d ./dspace/modules/doi/dspace-doi-api/target/surefire-reports ]; then  cat ./dspace/modules/doi/dspace-doi-api/target/surefire-reports/*; fi;
+
