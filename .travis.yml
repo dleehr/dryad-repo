@@ -5,5 +5,7 @@ before_install:
   - psql -U postgres -c 'create database travis_ci_test;'
   - psql travis_ci_test -U postgres < ./dspace/etc/postgres/database_create_doi_table.sql
   - export PATH="$TRAVIS_BUILD_DIR/apache-maven-2.2.1/bin:$PATH"
-install: ./test/bin/install-missing-poms.sh
-script: "mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=$TRAVIS_BUILD_DIR/test"
+install:
+  - ./test/bin/install-missing-poms.sh
+  - ./test/bin/install-dryad-dir.sh
+script: "mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=/opt/dryad"
