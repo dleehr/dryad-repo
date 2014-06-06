@@ -6,7 +6,5 @@ before_install:
   - psql travis_ci_test -U postgres < ./dspace/etc/postgres/database_create_doi_table.sql
   - export PATH="$TRAVIS_BUILD_DIR/apache-maven-2.2.1/bin:$PATH"
   - env
-  - cat /etc/mavenrc
-  - cat ~/.mavenrc
 install: true
-script: "M2_HOME=\"$TRAVIS_BUILD_DIR/apache-maven-2.2.1\" mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=$TRAVIS_BUILD_DIR/test"
+script: "mvn package -P postgres -Dmaven.test.skip=false -Ddefault.dspace.dir=$TRAVIS_BUILD_DIR/test"
